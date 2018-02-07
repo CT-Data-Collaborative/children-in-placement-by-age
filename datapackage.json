@@ -189,7 +189,6 @@
     "default": {      
       "ckan_name": "Default",
       "value": {
-        "Region": "Region 1: Southwest",
         "Year": ["SFY 2016-2017"],
         "Age Group": "Total", 
         "Location of Placement": "In State", 
