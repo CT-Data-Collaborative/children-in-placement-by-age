@@ -1,7 +1,8 @@
 Children in Placement by Age
 
-[![Build Status](https://travis-ci.org/CT-Data-Collaborative/children-in-placement-by-age.svg?branch=master)](https://travis-ci.org/CT-Data-Collaborative/children-in-placement-by-age)
 Children in Placement by Age reports the number of children in Connecticut Department of Children and Families (DCF) placement by Age Group.
+
+Data Source: <https://data.ct.gov/dataset/DCF-Children-in-Placement-Annual-Point-in-Time-Tre/v6zb-h5e2>
 
 ## License MIT
 

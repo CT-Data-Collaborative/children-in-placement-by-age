@@ -90,6 +90,25 @@ tot_Age <- unique(tot_Age)
 
 cip_df_long_clean <- rbind(cip_df_long_clean, tot_Age)
 
+#Backfill groups
+regions <- c("Other", "Region 1: Southwest", "Region 2: South Central", 
+             "Region 3: Eastern", "Region 4: North Central", 
+             "Region 5: Western", "Region 6: Central")
+
+backfill <- expand.grid(
+  DCF_Region = regions,
+  `Year` = unique(cip_df_long_clean$Year),
+  `Demographic` = unique(cip_df_long_clean$Demographic),
+  `Out_of_State` = unique(cip_df_long_clean$Out_of_State),
+  `Type of Placement` = unique(cip_df_long_clean$`Type of Placement`)
+)
+
+cip_df_long_clean <- as.data.frame(cip_df_long_clean, stringsAsFactors=FALSE)
+backfill <- as.data.frame(backfill, stringsAsFactors=FALSE)
+
+cip_df_long_clean <- merge(cip_df_long_clean, backfill, 
+                           by = c("DCF_Region", "Year", "Demographic", "Out_of_State", "Type of Placement"), 
+                           all.y=T)
 
 # Add Measure type and variable
 cip_df_long_clean$`Measure Type` <- "Number"
@@ -104,6 +123,7 @@ cip_df_long_clean$DCF_Region <- factor(cip_df_long_clean$DCF_Region,
                                               "Region 4: North Central",
                                               "Region 5: Western",
                                               "Region 6: Central",
+                                              #"Region 0", #dont include region 0 in final list
                                               "Other"))
 
 # Age Group
@@ -147,5 +167,5 @@ write.table(
     file.path(getwd(), "data", "children-in-placement-by-age.csv"),
     sep = ",",
     row.names = F,
-    na = "-9999"
+    na = "-6666" #Missing data that was backfilled
 )
